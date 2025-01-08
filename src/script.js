@@ -17,7 +17,7 @@ const menuBorder = menu.querySelector(".menu__border");
 let activeItem = menu.querySelector(".active");
 // 6⃣activeItemの引数＝メニューの中のアクティブクラス
 function clickItem(item, index) {
-// 7⃣クリックアイテム時の作動
+// 7⃣アイテムをクリックしたときの処理
     menu.style.removeProperty("--timeOut");
     // アイテム、インデックスをクリックしたとき.タイムアウトを追加
     if (activeItem == item) return;
@@ -28,9 +28,9 @@ function clickItem(item, index) {
     // removeは削除するactivの箇所を消せ
     
     item.classList.add("active");
-    // css.class.Listはそのタグを追加せよ
+    // css.class.Listにアクティブクラスを追加
     body.style.backgroundColor = bgColorsBody[index];
-    // 背景の色は、 bgColorsBodyから選択
+    // 背景の色は、 bgColorsBodyから選択[何個目を持ってきているか選択]
     activeItem = item;
     offsetMenuBorder(activeItem, menuBorder);
     
@@ -47,13 +47,13 @@ function offsetMenuBorder(element, menuBorder) {
     // getBoundingClientRect⇒要素のサイズとビューポート
     // （コンピューターグラフィックの中で現在表示されている領域）に対する相対位置を取得する
     
-    const left = Math.floor
+    const left = Math.floor(offsetActiveItem.left - menu.offsetLeft - (menuBorder.offsetWidth  - offsetActiveItem.width) / 2) +  "px";
 //     ⑩Math.floor:小数点以下切り捨て
 //     小数点以下を四捨五入する(round)
 // 　　小数点以下を切り上げる(ceil)
 // 　　小数点以下を切り捨てる(floor)
 
-    (offsetActiveItem.left - menu.offsetLeft - (menuBorder.offsetWidth  - offsetActiveItem.width) / 2) +  "px";
+    
 // 　　⇒9⃣offsetActiveItem.left
 //     表示されている画面.左側
 
@@ -64,7 +64,7 @@ function offsetMenuBorder(element, menuBorder) {
 // 　　⇒5⃣クリックしたときに表示される上半分の〇.横幅
 
 // 　offsetActiveItem.width
-// 　⇒9⃣画面に表示されている.横幅
+// 　⇒9⃣画面表示.横幅
 
     menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
 //     ⇒5⃣(クリックしたときに表示される)上半分の〇をtransformを代入＝translate3d() は CSS の関数で、要素を三次元空間内で再配置(xの座標＝左の定数、Yの座標、Z(奥行の座標))
@@ -84,7 +84,7 @@ function offsetMenuBorder(element, menuBorder) {
 }
 
 offsetMenuBorder(activeItem, menuBorder);
-// ⇒8⃣offsetMenuBorder右を計算する（⇒6⃣classメニ.あ.あの中のclassアクティブ（クリックしたときに出る色の〇）,=5⃣classメニューの中のclassメニューボーダー（クリックしたときに出る山））
+// ⇒8⃣offsetMenuBorder右を計算する（⇒6⃣メニューの中のアクティブクラス（クリックしたときに出る色の〇）の位置から5⃣classメニューの中のclassメニューボーダー（クリックしたときに出る山）を計算）
 menuItems.forEach((item, index) => {
 // クリックしたときに、動くように設定
 // ⇒4⃣中にあるアイテム.繰り返す⇒
